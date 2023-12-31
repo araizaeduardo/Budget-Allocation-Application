@@ -1,11 +1,16 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 const CurrencyType = () => {
-    const { expenses, budget } = useContext(AppContext);
-    const totalExpenses = expenses.reduce((total, item) => {
-        return (total = total + item.cost);
-    }, 0);
-    const alertType = totalExpenses > budget ? 'alert-danger' : 'alert-success';
+    const { dispatch } = useContext(AppContext);
+
+    const changeCurrency = () => {
+        dispatch({
+            type: 'CHG_CURRENCY',
+            payload: document.getElementById('inputGroupSelect03').value,
+        });
+    }
+    
+    
     return (
         <div className='alert alert-secondary'>
         <select name="currency" id="currency" onChange={(event)=>changeCurrency(event.target.value)}>
